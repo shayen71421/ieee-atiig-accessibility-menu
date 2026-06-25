@@ -80,43 +80,22 @@ export function AccessibilityMenu({
   ssr = false,
 }: AccessibilityMenuProps) {
   if (typeof window === "undefined") {
-    const ssrTheme = { ...DEFAULT_THEME, ...themeProp }
     const isRight = position === "bottom-right"
     const offset = typeof positionOffset === "number" ? positionOffset : positionOffset.y
     return (
       <button
+        suppressHydrationWarning
         className={`a11y-menu-button ${buttonClassName}`}
         data-open={false}
         data-right={isRight}
         style={{
-          position: "fixed",
           bottom: `${20 + offset}px`,
           left: isRight ? undefined : `${20 + offset}px`,
           right: isRight ? `${20 + offset}px` : undefined,
-          zIndex: 60,
-          background: `linear-gradient(135deg, ${ssrTheme.gradientFrom}, ${ssrTheme.gradientTo})`,
-          boxShadow: `0 4px 30px rgba(2, 58, 116, 0.28)`,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "56px",
-          height: "56px",
-          border: "none",
-          borderRadius: "50%",
-          cursor: "pointer",
-          color: "#fff",
         }}
         aria-label={labelsProp?.menuButton || "Accessibility Menu"}
         type="button"
-      >
-        <svg className="a11y-menu-button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" style={{ width: 24, height: 24 }}>
-          <circle cx="16" cy="4" r="1" />
-          <path d="m18 19 1-7-6 1" />
-          <path d="m5 8 3-3 5.5 3-2.36 3.5" />
-          <path d="M4.24 14.5a5 5 0 0 0 6.88 6" />
-          <path d="M13.76 17.5a5 5 0 0 0-6.88-6" />
-        </svg>
-      </button>
+      />
     )
   }
 
