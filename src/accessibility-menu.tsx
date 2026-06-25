@@ -80,6 +80,8 @@ export function AccessibilityMenu({
   ssr = false,
 }: AccessibilityMenuProps) {
   if (typeof window === "undefined") {
+    const ssrTheme = { ...DEFAULT_THEME, ...themeProp }
+    const ssrZIndex = { ...DEFAULT_Z_INDEX, ...zIndexProp }
     const isRight = position === "bottom-right"
     const offset = typeof positionOffset === "number" ? positionOffset : positionOffset.y
     return (
@@ -89,9 +91,13 @@ export function AccessibilityMenu({
         data-open={false}
         data-right={isRight}
         style={{
+          position: "fixed",
           bottom: `${20 + offset}px`,
           left: isRight ? undefined : `${20 + offset}px`,
           right: isRight ? `${20 + offset}px` : undefined,
+          zIndex: ssrZIndex.button,
+          background: `linear-gradient(135deg, ${ssrTheme.gradientFrom}, ${ssrTheme.gradientTo})`,
+          boxShadow: `0 4px 30px rgba(2, 58, 116, 0.28)`,
         }}
         aria-label={labelsProp?.menuButton || "Accessibility Menu"}
         type="button"
