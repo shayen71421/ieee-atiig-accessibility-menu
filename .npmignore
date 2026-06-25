@@ -1,0 +1,9 @@
+src/
+examples/
+tsconfig.json
+tsconfig.build.json
+tsup.config.ts
+.github/
+node_modules/
+.git/
+*.tgz
