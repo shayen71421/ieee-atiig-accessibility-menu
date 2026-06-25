@@ -1,11 +1,13 @@
 import { useState, useEffect, useCallback } from "react"
 import type { AccessibilitySettings } from "./types"
 import { DEFAULT_SETTINGS, ALL_ROOT_CLASSES } from "./types"
+import { MotionGlobalConfig } from "motion-utils"
 
 let _origAnimate: typeof Element.prototype.animate | null = null
 
 function stopWAAPI() {
   document.getAnimations().forEach((a) => a.pause())
+  MotionGlobalConfig.instantAnimations = true
   if (!_origAnimate) {
     _origAnimate = Element.prototype.animate
     Element.prototype.animate = function (this: Element, ...args) {
@@ -20,6 +22,7 @@ function resumeWAAPI() {
   document.getAnimations().forEach((a) => {
     try { a.play() } catch { /* already finished */ }
   })
+  MotionGlobalConfig.instantAnimations = false
   if (_origAnimate) {
     Element.prototype.animate = _origAnimate
     _origAnimate = null
