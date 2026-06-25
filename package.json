@@ -1,6 +1,6 @@
 {
   "name": "ieee-atiig-accessibility-menu",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "A fully customizable React accessibility menu component with font scaling, reading aids, color adjustments, and more.",
   "keywords": [
     "accessibility",
