@@ -33,6 +33,13 @@ export const styles = `
   filter: grayscale(100%) !important;
   -webkit-filter: grayscale(100%) !important;
 }
+.a11y-grayscale .a11y-menu-button,
+.a11y-grayscale .a11y-menu-panel,
+.a11y-grayscale .a11y-menu-button *,
+.a11y-grayscale .a11y-menu-panel * {
+  filter: none !important;
+  -webkit-filter: none !important;
+}
 
 .a11y-stop-animations,
 .a11y-stop-animations *,
@@ -42,6 +49,11 @@ export const styles = `
   animation-delay: 0s !important;
   transition-duration: 0s !important;
   transition-delay: 0s !important;
+}
+.a11y-stop-animations .a11y-menu-button,
+.a11y-stop-animations .a11y-menu-panel {
+  animation-duration: initial !important;
+  transition-duration: initial !important;
 }
 
 .a11y-big-cursor * {
