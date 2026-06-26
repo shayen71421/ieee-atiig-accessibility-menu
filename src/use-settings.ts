@@ -68,7 +68,7 @@ export function useSettings(
         return { ...DEFAULT_SETTINGS, ...JSON.parse(saved), ...initialSettings }
       }
     } catch (error) {
-      console.error(`[ieee-atiig-accessibility-menu] Failed to parse stored settings:`, error)
+      console.error(`[@ieee-atiig/accessibility-menu] Failed to parse stored settings:`, error)
     }
 
     return { ...DEFAULT_SETTINGS, ...initialSettings }
@@ -91,7 +91,7 @@ export function useSettings(
         try {
           localStorage.setItem(storageKey, JSON.stringify(next))
         } catch (error) {
-          console.error(`[ieee-atiig-accessibility-menu] Failed to persist settings:`, error)
+          console.error(`[@ieee-atiig/accessibility-menu] Failed to persist settings:`, error)
         }
       }
       onSettingsChange?.(next)

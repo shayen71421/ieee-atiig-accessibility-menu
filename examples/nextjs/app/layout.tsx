@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "ieee-atiig-accessibility-menu Next.js Example",
+  title: "@ieee-atiig/accessibility-menu Next.js Example",
 }
 
 export default function RootLayout({

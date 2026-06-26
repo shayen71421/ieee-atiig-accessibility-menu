@@ -1,5 +1,5 @@
 {
-  "name": "ieee-atiig-accessibility-menu",
+  "name": "@ieee-atiig/accessibility-menu",
   "version": "1.0.4",
   "description": "A fully customizable React accessibility menu component with font scaling, reading aids, color adjustments, and more.",
   "keywords": [
@@ -27,12 +27,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/IEEE-ATII/ieee-atiig-accessibility-menu.git"
+    "url": "git+https://github.com/IEEE-ATII/accessibility-menu.git"
   },
   "bugs": {
-    "url": "https://github.com/IEEE-ATII/ieee-atiig-accessibility-menu/issues"
+    "url": "https://github.com/IEEE-ATII/accessibility-menu/issues"
   },
-  "homepage": "https://github.com/IEEE-ATII/ieee-atiig-accessibility-menu#readme",
+  "homepage": "https://github.com/IEEE-ATII/accessibility-menu#readme",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",

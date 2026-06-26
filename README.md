@@ -1,4 +1,4 @@
-# ieee-atiig-accessibility-menu
+# @ieee-atiig/accessibility-menu
 
 A fully customizable React accessibility menu component. Provides font scaling, reading aids, color adjustments, and more to help make your web app more accessible.
 
@@ -21,13 +21,13 @@ A fully customizable React accessibility menu component. Provides font scaling, 
 ## Installation
 
 ```bash
-npm install ieee-atiig-accessibility-menu
+npm install @ieee-atiig/accessibility-menu
 ```
 
 ## Basic Usage
 
 ```tsx
-import { AccessibilityMenu } from "ieee-atiig-accessibility-menu";
+import { AccessibilityMenu } from "@ieee-atiig/accessibility-menu";
 
 function App() {
   return (
@@ -46,7 +46,7 @@ The component injects its own CSS at runtime — no additional imports needed.
 If you prefer to load styles statically:
 
 ```tsx
-import "ieee-atiig-accessibility-menu/styles.css";
+import "@ieee-atiig/accessibility-menu/styles.css";
 ```
 
 ## Props

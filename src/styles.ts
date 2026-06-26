@@ -1,13 +1,13 @@
 /**
  * Inline styles for the accessibility menu.
  * Injected automatically when the component mounts.
- * Users can also import `ieee-atiig-accessibility-menu/styles.css` for static loading.
+ * Users can also import `@ieee-atiig/accessibility-menu/styles.css` for static loading.
  */
 
 // We duplicate the CSS here so the component can inject it at runtime
 // without requiring users to manually import a CSS file.
 export const styles = `
-/* ===== ieee-atiig-accessibility-menu: Core Styles ===== */
+/* ===== @ieee-atiig/accessibility-menu: Core Styles ===== */
 
 .a11y-font-size-10 { font-size: 110% !important; }
 .a11y-font-size-20 { font-size: 120% !important; }

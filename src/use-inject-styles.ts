@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 
-const STYLE_ID = "ieee-atiig-accessibility-menu-injected-styles"
+const STYLE_ID = "@ieee-atiig/accessibility-menu-injected-styles"
 
 /**
  * Injects the package stylesheet into the document head at runtime.
