@@ -2,6 +2,7 @@
 "use client"
 
 import { useState } from "react"
+import type React from "react"
 import { useIsMobile } from "./use-is-mobile"
 import { useMousePosition } from "./use-mouse-position"
 import { useSettings } from "./use-settings"
@@ -55,6 +56,55 @@ const ALIGNMENT_ICONS = {
 
 const ALIGNMENT_VALUES = ["off", "left", "center", "right", "justify"] as const
 
+function SSRButton({
+  position,
+  positionOffset = 0,
+  buttonClassName,
+  theme: themeProp,
+  zIndex: zIndexProp,
+  labels: labelsProp,
+}: {
+  position: AccessibilityMenuProps["position"]
+  positionOffset?: AccessibilityMenuProps["positionOffset"]
+  buttonClassName: AccessibilityMenuProps["buttonClassName"]
+  theme?: AccessibilityMenuProps["theme"]
+  zIndex?: AccessibilityMenuProps["zIndex"]
+  labels?: AccessibilityMenuProps["labels"]
+}) {
+  const ssrTheme = { ...DEFAULT_THEME, ...themeProp }
+  const ssrZIndex = { ...DEFAULT_Z_INDEX, ...zIndexProp }
+  const isRight = position === "bottom-right"
+  const offset = typeof positionOffset === "number" ? positionOffset : positionOffset.y
+  return (
+    <div data-a11y-root>
+      <button
+        className={`a11y-menu-button ${buttonClassName}`}
+        data-open={false}
+        data-right={isRight}
+        style={{
+          bottom: `${20 + offset}px`,
+          left: isRight ? undefined : `${20 + offset}px`,
+          right: isRight ? `${20 + offset}px` : undefined,
+          "--a11y-z": `${ssrZIndex.button}`,
+          "--a11y-gradient-from": ssrTheme.gradientFrom,
+          "--a11y-gradient-to": ssrTheme.gradientTo,
+          "--a11y-primary": ssrTheme.primary,
+        } as React.CSSProperties}
+        aria-label={labelsProp?.menuButton || "Accessibility Menu"}
+        type="button"
+      >
+        <svg className="a11y-menu-button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="16" cy="4" r="1" />
+          <path d="m18 19 1-7-6 1" />
+          <path d="m5 8 3-3 5.5 3-2.36 3.5" />
+          <path d="M4.24 14.5a5 5 0 0 0 6.88 6" />
+          <path d="M13.76 17.5a5 5 0 0 0-6.88-6" />
+        </svg>
+      </button>
+    </div>
+  )
+}
+
 export function AccessibilityMenu({
   initialSettings,
   storageKey = "ieee-atiig-accessibility-menu-settings",
@@ -77,43 +127,8 @@ export function AccessibilityMenu({
   showBigCursor = true,
   showStopAnimations = true,
   theme: themeProp,
-  ssr = false,
+  ssr: _ssr = false,
 }: AccessibilityMenuProps) {
-  if (typeof window === "undefined") {
-    const ssrTheme = { ...DEFAULT_THEME, ...themeProp }
-    const ssrZIndex = { ...DEFAULT_Z_INDEX, ...zIndexProp }
-    const isRight = position === "bottom-right"
-    const offset = typeof positionOffset === "number" ? positionOffset : positionOffset.y
-    return (
-      <div data-a11y-root>
-        <button
-          className={`a11y-menu-button ${buttonClassName}`}
-          data-open={false}
-          data-right={isRight}
-          style={{
-            bottom: `${20 + offset}px`,
-            left: isRight ? undefined : `${20 + offset}px`,
-            right: isRight ? `${20 + offset}px` : undefined,
-            "--a11y-z": `${ssrZIndex.button}`,
-            "--a11y-gradient-from": ssrTheme.gradientFrom,
-            "--a11y-gradient-to": ssrTheme.gradientTo,
-            "--a11y-primary": ssrTheme.primary,
-          } as any}
-          aria-label={labelsProp?.menuButton || "Accessibility Menu"}
-          type="button"
-        >
-          <svg className="a11y-menu-button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="16" cy="4" r="1" />
-            <path d="m18 19 1-7-6 1" />
-            <path d="m5 8 3-3 5.5 3-2.36 3.5" />
-            <path d="M4.24 14.5a5 5 0 0 0 6.88 6" />
-            <path d="M13.76 17.5a5 5 0 0 0-6.88-6" />
-          </svg>
-        </button>
-      </div>
-    )
-  }
-
   useInjectStyles(styles)
 
   const [isOpen, setIsOpen] = useState(false)
@@ -135,6 +150,19 @@ export function AccessibilityMenu({
   const handleReset = () => {
     resetSettings()
     onReset?.()
+  }
+
+  if (typeof window === "undefined") {
+    return (
+      <SSRButton
+        position={position}
+        positionOffset={positionOffset}
+        buttonClassName={buttonClassName}
+        theme={themeProp}
+        zIndex={zIndexProp}
+        labels={labelsProp}
+      />
+    )
   }
 
   return (
@@ -161,7 +189,7 @@ export function AccessibilityMenu({
           "--a11y-gradient-from": theme.gradientFrom,
           "--a11y-gradient-to": theme.gradientTo,
           "--a11y-primary": theme.primary,
-        } as any}
+        } as React.CSSProperties}
         aria-label={labels.menuButton}
         type="button"
       >

@@ -11,6 +11,7 @@ export function useIsMobile(breakpoint: number = MOBILE_BREAKPOINT): boolean {
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
+    if (typeof window === "undefined") return
     const check = () => setIsMobile(window.innerWidth < breakpoint)
     check()
     window.addEventListener("resize", check)

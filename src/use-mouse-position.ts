@@ -8,6 +8,7 @@ export function useMousePosition(isMobile: boolean): { y: number } {
   const [mousePos, setMousePos] = useState({ y: 300 })
 
   useEffect(() => {
+    if (typeof window === "undefined") return
     if (isMobile) {
       const handleTouch = (e: TouchEvent) => {
         if (e.touches.length > 0) setMousePos({ y: e.touches[0].clientY })
